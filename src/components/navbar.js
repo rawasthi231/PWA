@@ -1,7 +1,7 @@
 import React from "react"
 import { Nav, Navbar } from 'react-bootstrap';
 import {Link} from "react-router-dom";
-import "./style.css";
+import "./css/style.css";
 
 function Navigation () {
   return (
@@ -12,7 +12,8 @@ function Navigation () {
           <Nav.Link><Link to="/">Home</Link></Nav.Link>
           <Nav.Link><Link to="/users">Users</Link></Nav.Link>
           <Nav.Link><Link to="/about">About</Link></Nav.Link>
-          <Nav.Link><Link to="/video-call">Call</Link></Nav.Link>
+          <Nav.Link><Link to="/chat">Chat</Link></Nav.Link>
+          {/*<Nav.Link><Link to="/video-call">Call</Link></Nav.Link>*/}
         </Nav>
       </Navbar>
     </>
