@@ -1,5 +1,5 @@
-import React, { useState } from "react";
 import {useHistory} from "react-router-dom";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Container, Row, Col, Form, Button } from "react-bootstrap";
 
@@ -7,6 +7,13 @@ export default function Users(props) {
 
   const [data, setData] = useState({});
   let history = useHistory();
+
+  useEffect(() => {
+    if(props.location.state.val){
+      setData(props.location.state.val);
+    }
+  }, [setData]);
+
   const handleChange = (e) => {
     setData((prevState) => ({
       ...prevState,
@@ -15,10 +22,10 @@ export default function Users(props) {
   }
 
   const handleSubmit = () => {
-    axios.post("http://localhost:8000/user_registration", { data })
+    axios.post("http://localhost:8000/edit_user", { data })
       .then(response => console.log(response.data))
       .catch(error => console.error(error))
-      .finally(() => history.push("/users"))
+      .finally(() => history.push("/users"));
   }
 
   return (
@@ -29,19 +36,19 @@ export default function Users(props) {
             <Form>
               <Form.Group controlId="formBasicEmail">
                 <Form.Label className="float-left">Name</Form.Label>
-                <Form.Control type="text" placeholder="Enter Full Name" name="name" onChange={handleChange} />
+                <Form.Control type="text" placeholder="Enter Full Name" name="name" defaultValue={data.name} onChange={handleChange} />
               </Form.Group>
               <Form.Group controlId="formBasicEmail">
                 <Form.Label className="float-left">Mobile No.</Form.Label>
-                <Form.Control type="text" placeholder="Enter Mobile No." name="mobile" onChange={handleChange} />
+                <Form.Control type="text" placeholder="Enter Mobile No." name="mobile" defaultValue={data.mobile} onChange={handleChange} />
               </Form.Group>
               <Form.Group controlId="formBasicEmail">
                 <Form.Label className="float-left">Email Address</Form.Label>
-                <Form.Control type="email" placeholder="Enter Email" name="email" onChange={handleChange} />
+                <Form.Control type="email" placeholder="Enter Email" name="email" defaultValue={data.email} onChange={handleChange} />
               </Form.Group>
               <Form.Group controlId="formBasicPassword">
                 <Form.Label className="float-left">Address</Form.Label>
-                <Form.Control as="textarea" rows={3} placeholder="Enter Address" name="address" onChange={handleChange} />
+                <Form.Control as="textarea" rows={3} placeholder="Enter Address" name="address" defaultValue={data.address} onChange={handleChange} />
               </Form.Group>
               <Form.Group>
                 <Form.Text className="text-muted">
